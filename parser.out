@@ -1,0 +1,659 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> atribuir_stmt
+Rule 2     programa -> atribuir_stmt E_KW mostrar_stmt
+Rule 3     atribuir_stmt -> ATRIBUIR_KW ID EQUALS exp
+Rule 4     mostrar_stmt -> MOSTRAR_KW ID
+Rule 5     exp -> exp PLUS exp
+Rule 6     exp -> exp MINUS exp
+Rule 7     exp -> exp TIMES exp
+Rule 8     exp -> exp DIVIDE exp
+Rule 9     exp -> exp POWER exp
+Rule 10    exp -> LPAREN exp RPAREN
+Rule 11    exp -> MINUS exp
+Rule 12    exp -> NUMBER
+Rule 13    exp -> ID
+Rule 14    exp -> DERIVAR_KW exp
+Rule 15    exp -> INTEGRAR_KW exp
+
+Terminals, with rules where they appear
+
+ATRIBUIR_KW          : 3
+DERIVAR_KW           : 14
+DIVIDE               : 8
+EQUALS               : 3
+E_KW                 : 2
+ID                   : 3 4 13
+INTEGRAR_KW          : 15
+LPAREN               : 10
+MINUS                : 6 11
+MOSTRAR_KW           : 4
+NUMBER               : 12
+PLUS                 : 5
+POWER                : 9
+RPAREN               : 10
+TIMES                : 7
+error                : 
+
+Nonterminals, with rules where they appear
+
+atribuir_stmt        : 1 2
+exp                  : 3 5 5 6 6 7 7 8 8 9 9 10 11 14 15
+mostrar_stmt         : 2
+programa             : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . atribuir_stmt
+    (2) programa -> . atribuir_stmt E_KW mostrar_stmt
+    (3) atribuir_stmt -> . ATRIBUIR_KW ID EQUALS exp
+
+    ATRIBUIR_KW     shift and go to state 3
+
+    programa                       shift and go to state 1
+    atribuir_stmt                  shift and go to state 2
+
+state 1
+
+    (0) S' -> programa .
+
+
+
+state 2
+
+    (1) programa -> atribuir_stmt .
+    (2) programa -> atribuir_stmt . E_KW mostrar_stmt
+
+    $end            reduce using rule 1 (programa -> atribuir_stmt .)
+    E_KW            shift and go to state 4
+
+
+state 3
+
+    (3) atribuir_stmt -> ATRIBUIR_KW . ID EQUALS exp
+
+    ID              shift and go to state 5
+
+
+state 4
+
+    (2) programa -> atribuir_stmt E_KW . mostrar_stmt
+    (4) mostrar_stmt -> . MOSTRAR_KW ID
+
+    MOSTRAR_KW      shift and go to state 7
+
+    mostrar_stmt                   shift and go to state 6
+
+state 5
+
+    (3) atribuir_stmt -> ATRIBUIR_KW ID . EQUALS exp
+
+    EQUALS          shift and go to state 8
+
+
+state 6
+
+    (2) programa -> atribuir_stmt E_KW mostrar_stmt .
+
+    $end            reduce using rule 2 (programa -> atribuir_stmt E_KW mostrar_stmt .)
+
+
+state 7
+
+    (4) mostrar_stmt -> MOSTRAR_KW . ID
+
+    ID              shift and go to state 9
+
+
+state 8
+
+    (3) atribuir_stmt -> ATRIBUIR_KW ID EQUALS . exp
+    (5) exp -> . exp PLUS exp
+    (6) exp -> . exp MINUS exp
+    (7) exp -> . exp TIMES exp
+    (8) exp -> . exp DIVIDE exp
+    (9) exp -> . exp POWER exp
+    (10) exp -> . LPAREN exp RPAREN
+    (11) exp -> . MINUS exp
+    (12) exp -> . NUMBER
+    (13) exp -> . ID
+    (14) exp -> . DERIVAR_KW exp
+    (15) exp -> . INTEGRAR_KW exp
+
+    LPAREN          shift and go to state 13
+    MINUS           shift and go to state 12
+    NUMBER          shift and go to state 14
+    ID              shift and go to state 10
+    DERIVAR_KW      shift and go to state 15
+    INTEGRAR_KW     shift and go to state 16
+
+    exp                            shift and go to state 11
+
+state 9
+
+    (4) mostrar_stmt -> MOSTRAR_KW ID .
+
+    $end            reduce using rule 4 (mostrar_stmt -> MOSTRAR_KW ID .)
+
+
+state 10
+
+    (13) exp -> ID .
+
+    PLUS            reduce using rule 13 (exp -> ID .)
+    MINUS           reduce using rule 13 (exp -> ID .)
+    TIMES           reduce using rule 13 (exp -> ID .)
+    DIVIDE          reduce using rule 13 (exp -> ID .)
+    POWER           reduce using rule 13 (exp -> ID .)
+    E_KW            reduce using rule 13 (exp -> ID .)
+    $end            reduce using rule 13 (exp -> ID .)
+    RPAREN          reduce using rule 13 (exp -> ID .)
+
+
+state 11
+
+    (3) atribuir_stmt -> ATRIBUIR_KW ID EQUALS exp .
+    (5) exp -> exp . PLUS exp
+    (6) exp -> exp . MINUS exp
+    (7) exp -> exp . TIMES exp
+    (8) exp -> exp . DIVIDE exp
+    (9) exp -> exp . POWER exp
+
+    E_KW            reduce using rule 3 (atribuir_stmt -> ATRIBUIR_KW ID EQUALS exp .)
+    $end            reduce using rule 3 (atribuir_stmt -> ATRIBUIR_KW ID EQUALS exp .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POWER           shift and go to state 21
+
+
+state 12
+
+    (11) exp -> MINUS . exp
+    (5) exp -> . exp PLUS exp
+    (6) exp -> . exp MINUS exp
+    (7) exp -> . exp TIMES exp
+    (8) exp -> . exp DIVIDE exp
+    (9) exp -> . exp POWER exp
+    (10) exp -> . LPAREN exp RPAREN
+    (11) exp -> . MINUS exp
+    (12) exp -> . NUMBER
+    (13) exp -> . ID
+    (14) exp -> . DERIVAR_KW exp
+    (15) exp -> . INTEGRAR_KW exp
+
+    LPAREN          shift and go to state 13
+    MINUS           shift and go to state 12
+    NUMBER          shift and go to state 14
+    ID              shift and go to state 10
+    DERIVAR_KW      shift and go to state 15
+    INTEGRAR_KW     shift and go to state 16
+
+    exp                            shift and go to state 22
+
+state 13
+
+    (10) exp -> LPAREN . exp RPAREN
+    (5) exp -> . exp PLUS exp
+    (6) exp -> . exp MINUS exp
+    (7) exp -> . exp TIMES exp
+    (8) exp -> . exp DIVIDE exp
+    (9) exp -> . exp POWER exp
+    (10) exp -> . LPAREN exp RPAREN
+    (11) exp -> . MINUS exp
+    (12) exp -> . NUMBER
+    (13) exp -> . ID
+    (14) exp -> . DERIVAR_KW exp
+    (15) exp -> . INTEGRAR_KW exp
+
+    LPAREN          shift and go to state 13
+    MINUS           shift and go to state 12
+    NUMBER          shift and go to state 14
+    ID              shift and go to state 10
+    DERIVAR_KW      shift and go to state 15
+    INTEGRAR_KW     shift and go to state 16
+
+    exp                            shift and go to state 23
+
+state 14
+
+    (12) exp -> NUMBER .
+
+    PLUS            reduce using rule 12 (exp -> NUMBER .)
+    MINUS           reduce using rule 12 (exp -> NUMBER .)
+    TIMES           reduce using rule 12 (exp -> NUMBER .)
+    DIVIDE          reduce using rule 12 (exp -> NUMBER .)
+    POWER           reduce using rule 12 (exp -> NUMBER .)
+    E_KW            reduce using rule 12 (exp -> NUMBER .)
+    $end            reduce using rule 12 (exp -> NUMBER .)
+    RPAREN          reduce using rule 12 (exp -> NUMBER .)
+
+
+state 15
+
+    (14) exp -> DERIVAR_KW . exp
+    (5) exp -> . exp PLUS exp
+    (6) exp -> . exp MINUS exp
+    (7) exp -> . exp TIMES exp
+    (8) exp -> . exp DIVIDE exp
+    (9) exp -> . exp POWER exp
+    (10) exp -> . LPAREN exp RPAREN
+    (11) exp -> . MINUS exp
+    (12) exp -> . NUMBER
+    (13) exp -> . ID
+    (14) exp -> . DERIVAR_KW exp
+    (15) exp -> . INTEGRAR_KW exp
+
+    LPAREN          shift and go to state 13
+    MINUS           shift and go to state 12
+    NUMBER          shift and go to state 14
+    ID              shift and go to state 10
+    DERIVAR_KW      shift and go to state 15
+    INTEGRAR_KW     shift and go to state 16
+
+    exp                            shift and go to state 24
+
+state 16
+
+    (15) exp -> INTEGRAR_KW . exp
+    (5) exp -> . exp PLUS exp
+    (6) exp -> . exp MINUS exp
+    (7) exp -> . exp TIMES exp
+    (8) exp -> . exp DIVIDE exp
+    (9) exp -> . exp POWER exp
+    (10) exp -> . LPAREN exp RPAREN
+    (11) exp -> . MINUS exp
+    (12) exp -> . NUMBER
+    (13) exp -> . ID
+    (14) exp -> . DERIVAR_KW exp
+    (15) exp -> . INTEGRAR_KW exp
+
+    LPAREN          shift and go to state 13
+    MINUS           shift and go to state 12
+    NUMBER          shift and go to state 14
+    ID              shift and go to state 10
+    DERIVAR_KW      shift and go to state 15
+    INTEGRAR_KW     shift and go to state 16
+
+    exp                            shift and go to state 25
+
+state 17
+
+    (5) exp -> exp PLUS . exp
+    (5) exp -> . exp PLUS exp
+    (6) exp -> . exp MINUS exp
+    (7) exp -> . exp TIMES exp
+    (8) exp -> . exp DIVIDE exp
+    (9) exp -> . exp POWER exp
+    (10) exp -> . LPAREN exp RPAREN
+    (11) exp -> . MINUS exp
+    (12) exp -> . NUMBER
+    (13) exp -> . ID
+    (14) exp -> . DERIVAR_KW exp
+    (15) exp -> . INTEGRAR_KW exp
+
+    LPAREN          shift and go to state 13
+    MINUS           shift and go to state 12
+    NUMBER          shift and go to state 14
+    ID              shift and go to state 10
+    DERIVAR_KW      shift and go to state 15
+    INTEGRAR_KW     shift and go to state 16
+
+    exp                            shift and go to state 26
+
+state 18
+
+    (6) exp -> exp MINUS . exp
+    (5) exp -> . exp PLUS exp
+    (6) exp -> . exp MINUS exp
+    (7) exp -> . exp TIMES exp
+    (8) exp -> . exp DIVIDE exp
+    (9) exp -> . exp POWER exp
+    (10) exp -> . LPAREN exp RPAREN
+    (11) exp -> . MINUS exp
+    (12) exp -> . NUMBER
+    (13) exp -> . ID
+    (14) exp -> . DERIVAR_KW exp
+    (15) exp -> . INTEGRAR_KW exp
+
+    LPAREN          shift and go to state 13
+    MINUS           shift and go to state 12
+    NUMBER          shift and go to state 14
+    ID              shift and go to state 10
+    DERIVAR_KW      shift and go to state 15
+    INTEGRAR_KW     shift and go to state 16
+
+    exp                            shift and go to state 27
+
+state 19
+
+    (7) exp -> exp TIMES . exp
+    (5) exp -> . exp PLUS exp
+    (6) exp -> . exp MINUS exp
+    (7) exp -> . exp TIMES exp
+    (8) exp -> . exp DIVIDE exp
+    (9) exp -> . exp POWER exp
+    (10) exp -> . LPAREN exp RPAREN
+    (11) exp -> . MINUS exp
+    (12) exp -> . NUMBER
+    (13) exp -> . ID
+    (14) exp -> . DERIVAR_KW exp
+    (15) exp -> . INTEGRAR_KW exp
+
+    LPAREN          shift and go to state 13
+    MINUS           shift and go to state 12
+    NUMBER          shift and go to state 14
+    ID              shift and go to state 10
+    DERIVAR_KW      shift and go to state 15
+    INTEGRAR_KW     shift and go to state 16
+
+    exp                            shift and go to state 28
+
+state 20
+
+    (8) exp -> exp DIVIDE . exp
+    (5) exp -> . exp PLUS exp
+    (6) exp -> . exp MINUS exp
+    (7) exp -> . exp TIMES exp
+    (8) exp -> . exp DIVIDE exp
+    (9) exp -> . exp POWER exp
+    (10) exp -> . LPAREN exp RPAREN
+    (11) exp -> . MINUS exp
+    (12) exp -> . NUMBER
+    (13) exp -> . ID
+    (14) exp -> . DERIVAR_KW exp
+    (15) exp -> . INTEGRAR_KW exp
+
+    LPAREN          shift and go to state 13
+    MINUS           shift and go to state 12
+    NUMBER          shift and go to state 14
+    ID              shift and go to state 10
+    DERIVAR_KW      shift and go to state 15
+    INTEGRAR_KW     shift and go to state 16
+
+    exp                            shift and go to state 29
+
+state 21
+
+    (9) exp -> exp POWER . exp
+    (5) exp -> . exp PLUS exp
+    (6) exp -> . exp MINUS exp
+    (7) exp -> . exp TIMES exp
+    (8) exp -> . exp DIVIDE exp
+    (9) exp -> . exp POWER exp
+    (10) exp -> . LPAREN exp RPAREN
+    (11) exp -> . MINUS exp
+    (12) exp -> . NUMBER
+    (13) exp -> . ID
+    (14) exp -> . DERIVAR_KW exp
+    (15) exp -> . INTEGRAR_KW exp
+
+    LPAREN          shift and go to state 13
+    MINUS           shift and go to state 12
+    NUMBER          shift and go to state 14
+    ID              shift and go to state 10
+    DERIVAR_KW      shift and go to state 15
+    INTEGRAR_KW     shift and go to state 16
+
+    exp                            shift and go to state 30
+
+state 22
+
+    (11) exp -> MINUS exp .
+    (5) exp -> exp . PLUS exp
+    (6) exp -> exp . MINUS exp
+    (7) exp -> exp . TIMES exp
+    (8) exp -> exp . DIVIDE exp
+    (9) exp -> exp . POWER exp
+
+    PLUS            reduce using rule 11 (exp -> MINUS exp .)
+    MINUS           reduce using rule 11 (exp -> MINUS exp .)
+    TIMES           reduce using rule 11 (exp -> MINUS exp .)
+    DIVIDE          reduce using rule 11 (exp -> MINUS exp .)
+    POWER           reduce using rule 11 (exp -> MINUS exp .)
+    E_KW            reduce using rule 11 (exp -> MINUS exp .)
+    $end            reduce using rule 11 (exp -> MINUS exp .)
+    RPAREN          reduce using rule 11 (exp -> MINUS exp .)
+
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+  ! TIMES           [ shift and go to state 19 ]
+  ! DIVIDE          [ shift and go to state 20 ]
+  ! POWER           [ shift and go to state 21 ]
+
+
+state 23
+
+    (10) exp -> LPAREN exp . RPAREN
+    (5) exp -> exp . PLUS exp
+    (6) exp -> exp . MINUS exp
+    (7) exp -> exp . TIMES exp
+    (8) exp -> exp . DIVIDE exp
+    (9) exp -> exp . POWER exp
+
+    RPAREN          shift and go to state 31
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POWER           shift and go to state 21
+
+
+state 24
+
+    (14) exp -> DERIVAR_KW exp .
+    (5) exp -> exp . PLUS exp
+    (6) exp -> exp . MINUS exp
+    (7) exp -> exp . TIMES exp
+    (8) exp -> exp . DIVIDE exp
+    (9) exp -> exp . POWER exp
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for POWER resolved as shift
+    E_KW            reduce using rule 14 (exp -> DERIVAR_KW exp .)
+    $end            reduce using rule 14 (exp -> DERIVAR_KW exp .)
+    RPAREN          reduce using rule 14 (exp -> DERIVAR_KW exp .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POWER           shift and go to state 21
+
+  ! PLUS            [ reduce using rule 14 (exp -> DERIVAR_KW exp .) ]
+  ! MINUS           [ reduce using rule 14 (exp -> DERIVAR_KW exp .) ]
+  ! TIMES           [ reduce using rule 14 (exp -> DERIVAR_KW exp .) ]
+  ! DIVIDE          [ reduce using rule 14 (exp -> DERIVAR_KW exp .) ]
+  ! POWER           [ reduce using rule 14 (exp -> DERIVAR_KW exp .) ]
+
+
+state 25
+
+    (15) exp -> INTEGRAR_KW exp .
+    (5) exp -> exp . PLUS exp
+    (6) exp -> exp . MINUS exp
+    (7) exp -> exp . TIMES exp
+    (8) exp -> exp . DIVIDE exp
+    (9) exp -> exp . POWER exp
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for POWER resolved as shift
+    E_KW            reduce using rule 15 (exp -> INTEGRAR_KW exp .)
+    $end            reduce using rule 15 (exp -> INTEGRAR_KW exp .)
+    RPAREN          reduce using rule 15 (exp -> INTEGRAR_KW exp .)
+    PLUS            shift and go to state 17
+    MINUS           shift and go to state 18
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POWER           shift and go to state 21
+
+  ! PLUS            [ reduce using rule 15 (exp -> INTEGRAR_KW exp .) ]
+  ! MINUS           [ reduce using rule 15 (exp -> INTEGRAR_KW exp .) ]
+  ! TIMES           [ reduce using rule 15 (exp -> INTEGRAR_KW exp .) ]
+  ! DIVIDE          [ reduce using rule 15 (exp -> INTEGRAR_KW exp .) ]
+  ! POWER           [ reduce using rule 15 (exp -> INTEGRAR_KW exp .) ]
+
+
+state 26
+
+    (5) exp -> exp PLUS exp .
+    (5) exp -> exp . PLUS exp
+    (6) exp -> exp . MINUS exp
+    (7) exp -> exp . TIMES exp
+    (8) exp -> exp . DIVIDE exp
+    (9) exp -> exp . POWER exp
+
+    PLUS            reduce using rule 5 (exp -> exp PLUS exp .)
+    MINUS           reduce using rule 5 (exp -> exp PLUS exp .)
+    E_KW            reduce using rule 5 (exp -> exp PLUS exp .)
+    $end            reduce using rule 5 (exp -> exp PLUS exp .)
+    RPAREN          reduce using rule 5 (exp -> exp PLUS exp .)
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POWER           shift and go to state 21
+
+  ! TIMES           [ reduce using rule 5 (exp -> exp PLUS exp .) ]
+  ! DIVIDE          [ reduce using rule 5 (exp -> exp PLUS exp .) ]
+  ! POWER           [ reduce using rule 5 (exp -> exp PLUS exp .) ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+
+
+state 27
+
+    (6) exp -> exp MINUS exp .
+    (5) exp -> exp . PLUS exp
+    (6) exp -> exp . MINUS exp
+    (7) exp -> exp . TIMES exp
+    (8) exp -> exp . DIVIDE exp
+    (9) exp -> exp . POWER exp
+
+    PLUS            reduce using rule 6 (exp -> exp MINUS exp .)
+    MINUS           reduce using rule 6 (exp -> exp MINUS exp .)
+    E_KW            reduce using rule 6 (exp -> exp MINUS exp .)
+    $end            reduce using rule 6 (exp -> exp MINUS exp .)
+    RPAREN          reduce using rule 6 (exp -> exp MINUS exp .)
+    TIMES           shift and go to state 19
+    DIVIDE          shift and go to state 20
+    POWER           shift and go to state 21
+
+  ! TIMES           [ reduce using rule 6 (exp -> exp MINUS exp .) ]
+  ! DIVIDE          [ reduce using rule 6 (exp -> exp MINUS exp .) ]
+  ! POWER           [ reduce using rule 6 (exp -> exp MINUS exp .) ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+
+
+state 28
+
+    (7) exp -> exp TIMES exp .
+    (5) exp -> exp . PLUS exp
+    (6) exp -> exp . MINUS exp
+    (7) exp -> exp . TIMES exp
+    (8) exp -> exp . DIVIDE exp
+    (9) exp -> exp . POWER exp
+
+    PLUS            reduce using rule 7 (exp -> exp TIMES exp .)
+    MINUS           reduce using rule 7 (exp -> exp TIMES exp .)
+    TIMES           reduce using rule 7 (exp -> exp TIMES exp .)
+    DIVIDE          reduce using rule 7 (exp -> exp TIMES exp .)
+    E_KW            reduce using rule 7 (exp -> exp TIMES exp .)
+    $end            reduce using rule 7 (exp -> exp TIMES exp .)
+    RPAREN          reduce using rule 7 (exp -> exp TIMES exp .)
+    POWER           shift and go to state 21
+
+  ! POWER           [ reduce using rule 7 (exp -> exp TIMES exp .) ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+  ! TIMES           [ shift and go to state 19 ]
+  ! DIVIDE          [ shift and go to state 20 ]
+
+
+state 29
+
+    (8) exp -> exp DIVIDE exp .
+    (5) exp -> exp . PLUS exp
+    (6) exp -> exp . MINUS exp
+    (7) exp -> exp . TIMES exp
+    (8) exp -> exp . DIVIDE exp
+    (9) exp -> exp . POWER exp
+
+    PLUS            reduce using rule 8 (exp -> exp DIVIDE exp .)
+    MINUS           reduce using rule 8 (exp -> exp DIVIDE exp .)
+    TIMES           reduce using rule 8 (exp -> exp DIVIDE exp .)
+    DIVIDE          reduce using rule 8 (exp -> exp DIVIDE exp .)
+    E_KW            reduce using rule 8 (exp -> exp DIVIDE exp .)
+    $end            reduce using rule 8 (exp -> exp DIVIDE exp .)
+    RPAREN          reduce using rule 8 (exp -> exp DIVIDE exp .)
+    POWER           shift and go to state 21
+
+  ! POWER           [ reduce using rule 8 (exp -> exp DIVIDE exp .) ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+  ! TIMES           [ shift and go to state 19 ]
+  ! DIVIDE          [ shift and go to state 20 ]
+
+
+state 30
+
+    (9) exp -> exp POWER exp .
+    (5) exp -> exp . PLUS exp
+    (6) exp -> exp . MINUS exp
+    (7) exp -> exp . TIMES exp
+    (8) exp -> exp . DIVIDE exp
+    (9) exp -> exp . POWER exp
+
+    PLUS            reduce using rule 9 (exp -> exp POWER exp .)
+    MINUS           reduce using rule 9 (exp -> exp POWER exp .)
+    TIMES           reduce using rule 9 (exp -> exp POWER exp .)
+    DIVIDE          reduce using rule 9 (exp -> exp POWER exp .)
+    E_KW            reduce using rule 9 (exp -> exp POWER exp .)
+    $end            reduce using rule 9 (exp -> exp POWER exp .)
+    RPAREN          reduce using rule 9 (exp -> exp POWER exp .)
+    POWER           shift and go to state 21
+
+  ! POWER           [ reduce using rule 9 (exp -> exp POWER exp .) ]
+  ! PLUS            [ shift and go to state 17 ]
+  ! MINUS           [ shift and go to state 18 ]
+  ! TIMES           [ shift and go to state 19 ]
+  ! DIVIDE          [ shift and go to state 20 ]
+
+
+state 31
+
+    (10) exp -> LPAREN exp RPAREN .
+
+    PLUS            reduce using rule 10 (exp -> LPAREN exp RPAREN .)
+    MINUS           reduce using rule 10 (exp -> LPAREN exp RPAREN .)
+    TIMES           reduce using rule 10 (exp -> LPAREN exp RPAREN .)
+    DIVIDE          reduce using rule 10 (exp -> LPAREN exp RPAREN .)
+    POWER           reduce using rule 10 (exp -> LPAREN exp RPAREN .)
+    E_KW            reduce using rule 10 (exp -> LPAREN exp RPAREN .)
+    $end            reduce using rule 10 (exp -> LPAREN exp RPAREN .)
+    RPAREN          reduce using rule 10 (exp -> LPAREN exp RPAREN .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 24 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 24 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 24 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 24 resolved as shift
+WARNING: shift/reduce conflict for POWER in state 24 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 25 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 25 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 25 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 25 resolved as shift
+WARNING: shift/reduce conflict for POWER in state 25 resolved as shift
