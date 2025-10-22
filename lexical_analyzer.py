@@ -20,7 +20,7 @@ t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*'
 t_DIVIDE = r'/'
-t_POWER = r'\^' 
+t_POWER = r'\^'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_EQUALS = r'='
@@ -41,23 +41,6 @@ def t_newline(t):
     t.lexer.lineno += len(t.value)
 
 def t_error(t):
-    print(f"Caractere ilegal '{t.value[0]}'")
     t.lexer.skip(1)
 
-inputs = {
-    "input1": "atribuir x = 10",
-    "input2": "atribuir y = (5 + 3) * 2",
-    "input3": "atribuir f = derivar x^2",
-    "input4": "atribuir z = 10 e mostrar z",
-    "input5": "atribuir w = integrar (x + 1)",
-    "input6": "atribuir g = somar 4 e 3"
-}
-
 lexer = lex.lex()
-
-for title, value in inputs.items():
-    print(f"Tokens para {title}")
-    lexer.input(value)
-
-    for tok in lexer :
-        print(tok)
