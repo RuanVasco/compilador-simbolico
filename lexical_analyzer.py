@@ -1,4 +1,5 @@
 import ply.lex as lex
+import sympy as sp
 
 reserved = {
     'atribuir': 'ATRIBUIR_KW',
@@ -11,11 +12,13 @@ reserved = {
 tokens = [
     'NUMBER',
     'ID',
-    'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'POWER',
+    'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'POWER', 'MODULO',
     'LPAREN', 'RPAREN',
-    'EQUALS'
+    'EQUALS',
+    'STRING'
 ] + list(reserved.values())
 
+t_MODULO = r'\%'
 t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*'
@@ -27,18 +30,28 @@ t_EQUALS = r'='
 t_ignore = ' \t'
 
 def t_NUMBER(t):
-    r'\d+'
-    t.value = int(t.value)
+    r'\d+(\.\d+)?'
+    t.value = sp.S(t.value)
     return t
 
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
-    t.type = reserved.get(t.value, 'ID')
+    t.type = reserved.get(t.value, None)
+    if t.type:
+        return t
+
+    t.type = 'ID'
+    t.value = sp.Symbol(t.value)
     return t
 
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
+
+def t_STRING(t):
+    r'"[^"]*"|\'[^\']*\''
+    t.value = t.value[1:-1]
+    return t
 
 def t_error(t):
     t.lexer.skip(1)

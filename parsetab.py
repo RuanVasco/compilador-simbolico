@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftPLUSMINUSleftTIMESDIVIDErightPOWERATRIBUIR_KW DERIVAR_KW DIVIDE EQUALS E_KW ID INTEGRAR_KW LPAREN MINUS MOSTRAR_KW NUMBER PLUS POWER RPAREN TIMES\n    programa : atribuir\n             | atribuir E_KW mostrar\n    \n    atribuir : ATRIBUIR_KW ID EQUALS exp\n    \n    mostrar : MOSTRAR_KW ID\n    \n    exp : exp PLUS exp\n        | exp MINUS exp\n        | exp TIMES exp\n        | exp DIVIDE exp\n        | exp POWER exp\n    \n    exp : LPAREN exp RPAREN\n    \n    exp : DERIVAR_KW exp\n    \n    exp : INTEGRAR_KW exp\n    \n    exp : NUMBER\n    \n    exp : ID\n    '
+_lr_signature = 'leftPLUSMINUSleftTIMESDIVIDEMODULOrightPOWERATRIBUIR_KW DERIVAR_KW DIVIDE EQUALS E_KW ID INTEGRAR_KW LPAREN MINUS MODULO MOSTRAR_KW NUMBER PLUS POWER RPAREN STRING TIMES\n    programa : atribuir\n             | atribuir E_KW mostrar\n    \n    atribuir : ATRIBUIR_KW ID EQUALS exp\n    \n    mostrar : MOSTRAR_KW ID\n    \n    exp : exp PLUS exp\n        | exp MINUS exp\n        | exp TIMES exp\n        | exp DIVIDE exp\n        | exp POWER exp\n        | exp MODULO exp\n    \n    exp : LPAREN exp RPAREN\n    \n    exp : DERIVAR_KW exp\n    \n    exp : INTEGRAR_KW exp\n    \n    exp : NUMBER\n    \n    exp : ID\n    \n    exp : STRING\n    '
     
-_lr_action_items = {'ATRIBUIR_KW':([0,],[3,]),'$end':([1,2,6,9,10,11,15,22,23,24,25,26,27,28,29,],[0,-1,-2,-4,-14,-3,-13,-11,-12,-5,-6,-7,-8,-9,-10,]),'E_KW':([2,10,11,15,22,23,24,25,26,27,28,29,],[4,-14,-3,-13,-11,-12,-5,-6,-7,-8,-9,-10,]),'ID':([3,7,8,12,13,14,16,17,18,19,20,],[5,9,10,10,10,10,10,10,10,10,10,]),'MOSTRAR_KW':([4,],[7,]),'EQUALS':([5,],[8,]),'LPAREN':([8,12,13,14,16,17,18,19,20,],[12,12,12,12,12,12,12,12,12,]),'DERIVAR_KW':([8,12,13,14,16,17,18,19,20,],[13,13,13,13,13,13,13,13,13,]),'INTEGRAR_KW':([8,12,13,14,16,17,18,19,20,],[14,14,14,14,14,14,14,14,14,]),'NUMBER':([8,12,13,14,16,17,18,19,20,],[15,15,15,15,15,15,15,15,15,]),'PLUS':([10,11,15,21,22,23,24,25,26,27,28,29,],[-14,16,-13,16,16,16,-5,-6,-7,-8,-9,-10,]),'MINUS':([10,11,15,21,22,23,24,25,26,27,28,29,],[-14,17,-13,17,17,17,-5,-6,-7,-8,-9,-10,]),'TIMES':([10,11,15,21,22,23,24,25,26,27,28,29,],[-14,18,-13,18,18,18,18,18,-7,-8,-9,-10,]),'DIVIDE':([10,11,15,21,22,23,24,25,26,27,28,29,],[-14,19,-13,19,19,19,19,19,-7,-8,-9,-10,]),'POWER':([10,11,15,21,22,23,24,25,26,27,28,29,],[-14,20,-13,20,20,20,20,20,20,20,20,-10,]),'RPAREN':([10,15,21,22,23,24,25,26,27,28,29,],[-14,-13,29,-11,-12,-5,-6,-7,-8,-9,-10,]),}
+_lr_action_items = {'ATRIBUIR_KW':([0,],[3,]),'$end':([1,2,6,9,10,11,15,16,24,25,26,27,28,29,30,31,32,],[0,-1,-2,-4,-15,-3,-14,-16,-12,-13,-5,-6,-7,-8,-9,-10,-11,]),'E_KW':([2,10,11,15,16,24,25,26,27,28,29,30,31,32,],[4,-15,-3,-14,-16,-12,-13,-5,-6,-7,-8,-9,-10,-11,]),'ID':([3,7,8,12,13,14,17,18,19,20,21,22,],[5,9,10,10,10,10,10,10,10,10,10,10,]),'MOSTRAR_KW':([4,],[7,]),'EQUALS':([5,],[8,]),'LPAREN':([8,12,13,14,17,18,19,20,21,22,],[12,12,12,12,12,12,12,12,12,12,]),'DERIVAR_KW':([8,12,13,14,17,18,19,20,21,22,],[13,13,13,13,13,13,13,13,13,13,]),'INTEGRAR_KW':([8,12,13,14,17,18,19,20,21,22,],[14,14,14,14,14,14,14,14,14,14,]),'NUMBER':([8,12,13,14,17,18,19,20,21,22,],[15,15,15,15,15,15,15,15,15,15,]),'STRING':([8,12,13,14,17,18,19,20,21,22,],[16,16,16,16,16,16,16,16,16,16,]),'PLUS':([10,11,15,16,23,24,25,26,27,28,29,30,31,32,],[-15,17,-14,-16,17,17,17,-5,-6,-7,-8,-9,-10,-11,]),'MINUS':([10,11,15,16,23,24,25,26,27,28,29,30,31,32,],[-15,18,-14,-16,18,18,18,-5,-6,-7,-8,-9,-10,-11,]),'TIMES':([10,11,15,16,23,24,25,26,27,28,29,30,31,32,],[-15,19,-14,-16,19,19,19,19,19,-7,-8,-9,-10,-11,]),'DIVIDE':([10,11,15,16,23,24,25,26,27,28,29,30,31,32,],[-15,20,-14,-16,20,20,20,20,20,-7,-8,-9,-10,-11,]),'POWER':([10,11,15,16,23,24,25,26,27,28,29,30,31,32,],[-15,21,-14,-16,21,21,21,21,21,21,21,21,21,-11,]),'MODULO':([10,11,15,16,23,24,25,26,27,28,29,30,31,32,],[-15,22,-14,-16,22,22,22,22,22,-7,-8,-9,-10,-11,]),'RPAREN':([10,15,16,23,24,25,26,27,28,29,30,31,32,],[-15,-14,-16,32,-12,-13,-5,-6,-7,-8,-9,-10,-11,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'programa':([0,],[1,]),'atribuir':([0,],[2,]),'mostrar':([4,],[6,]),'exp':([8,12,13,14,16,17,18,19,20,],[11,21,22,23,24,25,26,27,28,]),}
+_lr_goto_items = {'programa':([0,],[1,]),'atribuir':([0,],[2,]),'mostrar':([4,],[6,]),'exp':([8,12,13,14,17,18,19,20,21,22,],[11,23,24,25,26,27,28,29,30,31,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,18 +27,20 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> programa","S'",1,None,None,None),
-  ('programa -> atribuir','programa',1,'p_programa','parser.py',18),
-  ('programa -> atribuir E_KW mostrar','programa',3,'p_programa','parser.py',19),
-  ('atribuir -> ATRIBUIR_KW ID EQUALS exp','atribuir',4,'p_atribuir','parser.py',31),
-  ('mostrar -> MOSTRAR_KW ID','mostrar',2,'p_mostrar','parser.py',39),
-  ('exp -> exp PLUS exp','exp',3,'p_exp_binop','parser.py',47),
-  ('exp -> exp MINUS exp','exp',3,'p_exp_binop','parser.py',48),
-  ('exp -> exp TIMES exp','exp',3,'p_exp_binop','parser.py',49),
-  ('exp -> exp DIVIDE exp','exp',3,'p_exp_binop','parser.py',50),
-  ('exp -> exp POWER exp','exp',3,'p_exp_binop','parser.py',51),
-  ('exp -> LPAREN exp RPAREN','exp',3,'p_exp_group','parser.py',58),
-  ('exp -> DERIVAR_KW exp','exp',2,'p_exp_derivada','parser.py',65),
-  ('exp -> INTEGRAR_KW exp','exp',2,'p_exp_integral','parser.py',72),
-  ('exp -> NUMBER','exp',1,'p_exp_number','parser.py',79),
-  ('exp -> ID','exp',1,'p_exp_variable','parser.py',86),
+  ('programa -> atribuir','programa',1,'p_programa','parser.py',27),
+  ('programa -> atribuir E_KW mostrar','programa',3,'p_programa','parser.py',28),
+  ('atribuir -> ATRIBUIR_KW ID EQUALS exp','atribuir',4,'p_atribuir','parser.py',39),
+  ('mostrar -> MOSTRAR_KW ID','mostrar',2,'p_mostrar','parser.py',45),
+  ('exp -> exp PLUS exp','exp',3,'p_exp_binop','parser.py',51),
+  ('exp -> exp MINUS exp','exp',3,'p_exp_binop','parser.py',52),
+  ('exp -> exp TIMES exp','exp',3,'p_exp_binop','parser.py',53),
+  ('exp -> exp DIVIDE exp','exp',3,'p_exp_binop','parser.py',54),
+  ('exp -> exp POWER exp','exp',3,'p_exp_binop','parser.py',55),
+  ('exp -> exp MODULO exp','exp',3,'p_exp_binop','parser.py',56),
+  ('exp -> LPAREN exp RPAREN','exp',3,'p_exp_group','parser.py',88),
+  ('exp -> DERIVAR_KW exp','exp',2,'p_exp_derivada','parser.py',94),
+  ('exp -> INTEGRAR_KW exp','exp',2,'p_exp_integral','parser.py',101),
+  ('exp -> NUMBER','exp',1,'p_exp_number','parser.py',108),
+  ('exp -> ID','exp',1,'p_exp_variable','parser.py',114),
+  ('exp -> STRING','exp',1,'p_exp_string','parser.py',120),
 ]
