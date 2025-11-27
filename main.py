@@ -112,6 +112,7 @@ def main():
         "input1": "atribuir g = x + 'ola'",
         "input2": "atribuir l = 8 % 3 e mostrar l",
         "input3": "atribuir f = derivar x^2",
+        "input4": "atribuir y = integrar (seno y^2)",
         "input5": "atribuir w = integrar (x + 1)",
         "input18": "atribuir f_deriv = derivar (derivar x^4)",
         "input19": "atribuir f_integ = integrar (integrar x)",

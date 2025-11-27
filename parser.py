@@ -114,6 +114,13 @@ def p_exp_integral(p):
     expr = p[2]
     p[0] = sp.integrate(expr, get_variable(expr))
 
+def p_exp_seno(p):
+    '''
+    exp : SENO_KW exp
+    '''
+    expr = p[2]
+    p[0] = sp.sin(expr)
+
 def p_exp_number(p):
     '''
     exp : NUMBER

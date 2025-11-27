@@ -29,6 +29,14 @@ class CodeGenerator:
         pow_ty = ir.FunctionType(self.double, [self.double, self.double])
         self.pow_func = ir.Function(self.module, pow_ty, name="llvm.pow.f64")
 
+        self.sqrt_func = ir.Function(self.module,
+            ir.FunctionType(self.double, [self.double]),
+            name="llvm.sqrt.f64")
+        
+        self.sin_func = ir.Function(self.module,
+            ir.FunctionType(self.double, [self.double]),
+            name="sin")
+
     def _codegen(self, expr):
 
         if isinstance(expr, sp.Symbol):
@@ -55,6 +63,20 @@ class CodeGenerator:
             exp = self._codegen(expr.args[1])
 
             return self.builder.call(self.pow_func, [base, exp], name='pow_tmp')
+        
+        if isinstance(expr, type(sp.pi)):
+            return ir.Constant(self.double, float(expr))
+        
+        if isinstance(expr, Function):
+            func_name = expr.func.__name__
+
+            if func_name == 'sin':
+                arg = self._codegen(expr.args[0])
+                return self.builder.call(self.sin_func, [arg], name='sin_tmp')
+            
+            if func_name == 'sqrt':
+                arg = self._codegen(expr.args[0])
+                return self.builder.call(self.sqrt_func, [arg], name='sqrt_tmp')
 
         if isinstance(expr, Function):
             pass
