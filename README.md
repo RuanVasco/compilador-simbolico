@@ -54,8 +54,7 @@ Este projeto depende da biblioteca `llvmlite`, que possui requisitos estritos de
 
 | Python | llvmlite | Status |
 | :--- | :--- | :--- |
-| 3.11.x | >= 0.39.1 | ✅ Estável (Recomendado) |
-| 3.10.x | >= 0.38.0 | ✅ Estável |
+| 3.11.x | >= 0.39.1 | Estável (Recomendado) |
 
 > **Nota sobre o LLVM:** O `llvmlite` instala sua própria versão minimalista do LLVM para gerar o código intermediário. Para executar os arquivos `.ll` gerados, você pode usar qualquer versão recente do interpretador `lli` (LLVM 14 a 20+), pois o código IR é retrocompatível.
 
