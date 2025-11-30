@@ -2,5 +2,6 @@
 *.out
 *.pyc
 *.log
+*.ll
 __pycache__/
 parsetab.py

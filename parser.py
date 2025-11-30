@@ -11,7 +11,7 @@ precedence = (
 )
 
 def get_variable(expr):
-    simbolos = list(expr.free_symbols)
+    simbolos = sorted(list(expr.free_symbols), key=lambda s: s.name)
     var_x = sp.Symbol('x')
 
     if var_x in simbolos:
@@ -67,16 +67,6 @@ def p_exp_binop(p):
         else:
             raise TypeError(f"Operação inválida: {type(e1)} {op} {type(e2)}")
         return
-
-    is_e1_num = isinstance(e1, (sp.Integer, sp.Float))
-    is_e2_num = isinstance(e2, (sp.Integer, sp.Float))
-
-    if is_e1_num and is_e2_num:
-        is_e1_float = isinstance(e1, sp.Float)
-        is_e2_float = isinstance(e2, sp.Float)
-
-        if is_e1_float != is_e2_float:
-            raise TypeError(f"Operação inválida: {type(e1)} {op} {type(e2)}")
 
     if op == '%':
         p[0] = e1 % e2

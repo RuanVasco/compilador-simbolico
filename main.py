@@ -2,7 +2,7 @@ import logging
 from input import Input
 from lexical_analyzer import lexer
 from parser import parser
-from llvm_compiler import CodeGenerator, compile_and_run
+from llvm_backend import LLVMBackend
 from tac_generator import TACGenerator
 import sympy as sp
 from sympy import srepr
@@ -32,7 +32,8 @@ def run_parser(data):
 
     return result
 
-def run_backend(expression, var_name):
+def run_backend(expression, var_name, test_name):
+    step: str = "TAC"
     if isinstance(expression, str):
         logging.info(f"[TAC] Ignorado: Expressão é uma string constante.")
         return expression
@@ -47,15 +48,29 @@ def run_backend(expression, var_name):
             logging.info(f"        {line}")
         logging.info(f"[Fim do Bloco TAC]")
 
+        variables = list(expression.free_symbols)
+        variables.sort(key=lambda s: s.name)
+
+        logging.info(f"--- Gerando LLVM IR para '{var_name}' ---")
+        step = "LLVM IR"
+
+        llvm_backend = LLVMBackend(func_name=var_name)
+        llvm_backend.generate_from_tac(tac_code, variables)
+
+        filename = f"{test_name}.ll"
+        llvm_backend.save_to_file(filename)
+
+        logging.info(f"[LLVM] Arquivo gerado: {filename}")
+
         return expression
 
     except Exception as e:
-        logging.error(f"ERRO ao gerar TAC: {e}")
+        logging.error(f"ERRO ao gerar código intermediário ({step}): {e}")
         return None
 
 def process_input(input, symbol_table):
     value = input.expr
-    logging.info(f"---==== Processando a entrada {input.name} ====---")
+    logging.info(f"\n\n---==== Processando a entrada {input.name} ====---")
     logging.info(f"'{value}'")
 
     try:
@@ -89,7 +104,7 @@ def process_input(input, symbol_table):
             logging.info(f"[SymPy Visual] {expression}")
             logging.info(f"[SymPy Interno] {srepr(expression)}")
 
-            value = run_backend(expression, var_name)
+            value = run_backend(expression, var_name, input.name)
 
             if value is not None:
                 symbol_table[var_name] = value
@@ -125,11 +140,12 @@ def main():
     inputs.append(Input("atribuir const = (10 + 2) * 3 e mostrar const", "36", "teste_constantes"))
     inputs.append(Input("atribuir poli = (x + 2) * (x - 2)", "(x - 2)*(x + 2)", "teste_algebra_simples"))
     inputs.append(Input("atribuir d = derivar(x^3 + 2*x)", "3*x**2 + 2", "teste_derivada"))
-    inputs.append(Input("atribuir i = integrar(y + t)", "t*y + y**2/2", "teste_integral_multivar"))
+    inputs.append(Input("atribuir i = integrar(y + t)", "t**2/2 + t*y", "teste_integral_multivar"))
     inputs.append(Input("atribuir complexo = derivar(integrar(x^2))", "x**2", "teste_cadeia_calculo"))
     inputs.append(Input("atribuir d_const = derivar 50", "0", "teste_derivada_constante"))
     inputs.append(Input("atribuir res_seno = derivar(seno x)", "cos(x)", "teste_derivada_seno"))
     inputs.append(Input("atribuir res_cos = derivar(cosseno x)", "-sin(x)", "teste_derivada_cosseno"))
+    inputs.append(Input("atribuir text = 'comp' + 'iladores'", "compiladores", "teste_concatenar"))
 
     symbol_table = {}
 

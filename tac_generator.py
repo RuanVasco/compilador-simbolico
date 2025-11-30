@@ -22,6 +22,9 @@ class TACGenerator:
         if isinstance(node, (sp.Symbol, sp.Integer, sp.Float)):
             return str(node)
 
+        if isinstance(node, sp.Rational):
+            return str(float(node))
+
         if isinstance(node, (sp.Add, sp.Mul)):
             op = "+" if isinstance(node, sp.Add) else "*"
 
@@ -43,6 +46,17 @@ class TACGenerator:
             result_temp = self.new_temp()
 
             self.instructions.append(f"{result_temp} = {base} ^ {exp}")
+            return result_temp
+
+        if isinstance(node, (sp.sin, sp.cos)):
+            func_name = "sin" if isinstance(node, sp.sin) else "cos"
+
+            arg = self.visit(node.args[0])
+
+            result_temp = self.new_temp()
+
+            self.instructions.append(f"{result_temp} = {func_name} {arg}")
+
             return result_temp
 
         return str(node)
