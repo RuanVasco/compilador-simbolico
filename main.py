@@ -4,6 +4,8 @@ from lexical_analyzer import lexer
 from parser import parser
 from llvm_compiler import CodeGenerator, compile_and_run
 from tac_generator import TACGenerator
+import sympy as sp
+from sympy import srepr
 
 def setup_logger():
     logging.basicConfig(
@@ -84,6 +86,9 @@ def process_input(input, symbol_table):
             var_name = str(atribuir_tuple[1])
             expression = atribuir_tuple[2]
 
+            logging.info(f"[SymPy Visual] {expression}")
+            logging.info(f"[SymPy Interno] {srepr(expression)}")
+
             value = run_backend(expression, var_name)
 
             if value is not None:
@@ -123,6 +128,8 @@ def main():
     inputs.append(Input("atribuir i = integrar(y + t)", "t*y + y**2/2", "teste_integral_multivar"))
     inputs.append(Input("atribuir complexo = derivar(integrar(x^2))", "x**2", "teste_cadeia_calculo"))
     inputs.append(Input("atribuir d_const = derivar 50", "0", "teste_derivada_constante"))
+    inputs.append(Input("atribuir res_seno = derivar(seno x)", "cos(x)", "teste_derivada_seno"))
+    inputs.append(Input("atribuir res_cos = derivar(cosseno x)", "-sin(x)", "teste_derivada_cosseno"))
 
     symbol_table = {}
 

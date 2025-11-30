@@ -118,6 +118,13 @@ def p_exp_seno(p):
     expr = p[2]
     p[0] = sp.sin(expr)
 
+def p_exp_cosseno(p):
+    '''
+    exp : COSSENO_KW exp
+    '''
+    expr = p[2]
+    p[0] = sp.cos(expr)
+
 def p_exp_number(p):
     '''
     exp : NUMBER

@@ -7,7 +7,8 @@ reserved = {
     'e': 'E_KW',
     'derivar': 'DERIVAR_KW',
     'integrar': 'INTEGRAR_KW',
-    'seno': 'SENO_KW'
+    'seno': 'SENO_KW',
+    'cosseno': 'COSSENO_KW'
 }
 
 tokens = [
