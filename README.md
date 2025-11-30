@@ -1,6 +1,6 @@
 # Compilador Simbólico com Backend LLVM
 
-Este projeto consiste em um compilador *source-to-source* desenvolvido em Python, capaz de interpretar expressões matemáticas complexas (incluindo derivadas e integrais), convertê-las para Código de Três Endereços (TAC) e, finalmente, gerar código de máquina intermediário (LLVM IR) executável.
+Este projeto consiste em um compilador desenvolvido em Python, capaz de interpretar expressões matemáticas complexas (incluindo derivadas e integrais), convertê-las para Código de Três Endereços (TAC) e, finalmente, gerar código de máquina intermediário (LLVM IR) executável.
 
 O sistema utiliza a biblioteca **SymPy** para a análise simbólica e **llvmlite** para a geração de código nativo.
 
