@@ -1,3 +1,4 @@
+import logging
 import ply.yacc as yacc
 import sympy as sp
 
@@ -28,10 +29,8 @@ def p_programa(p):
              | atribuir E_KW mostrar
     '''
     if len(p) == 2:
-        print(f"Programa Válido (Atribuição Simples): {p[1]}")
         p[0] = p[1]
     else:
-        print(f"Programa Válido (Atribuição e Mostrar): {p[1]} e {p[3]}")
         p[0] = (p[1], 'E', p[3])
 
 def p_atribuir(p):
@@ -66,7 +65,6 @@ def p_exp_binop(p):
         if op == '+' and e1_is_str and e2_is_str:
             p[0] = e1 + e2
         else:
-            print(f"Erro Semântico: Operação '{op}' inválida entre string e não-string.")
             raise TypeError(f"Operação inválida: {type(e1)} {op} {type(e2)}")
         return
 
@@ -78,7 +76,6 @@ def p_exp_binop(p):
         is_e2_float = isinstance(e2, sp.Float)
 
         if is_e1_float != is_e2_float:
-            print(f"Erro Semântico: Operação '{op}' com tipos mistos (int e float).")
             raise TypeError(f"Operação inválida: {type(e1)} {op} {type(e2)}")
 
     if op == '%':
@@ -141,8 +138,8 @@ def p_exp_string(p):
 
 def p_error(p):
     if p:
-        print(f"Erro de sintaxe: Token inesperado {p.type} ('{p.value}') na linha {p.lineno}")
+        logging.error(f"Erro de sintaxe: Token inesperado {p.type} ('{p.value}') na linha {p.lineno}")
     else:
-        print("Erro de sintaxe: Fim inesperado do arquivo (EOF)")
+        logging.error("Erro de sintaxe: Fim inesperado do arquivo (EOF)")
 
 parser = yacc.yacc()

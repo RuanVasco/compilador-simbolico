@@ -14,10 +14,15 @@ class TACGenerator:
         self.temp_count = 0
         self.instructions = []
         last_temp = self.visit(expr)
+
+        self.instructions.append(f"return {last_temp}")
         return self.instructions, last_temp
 
     def visit(self, node):
         if isinstance(node, (sp.Symbol, sp.Integer, sp.Float)):
+            return str(node)
+
+        if isinstance(node, (sp.Add, sp.Mul)):
             op = "+" if isinstance(node, sp.Add) else "*"
 
             left_operand = self.visit(node.args[0])
@@ -33,7 +38,7 @@ class TACGenerator:
             return left_operand
 
         if isinstance(node, sp.Pow):
-            base = self.visit(node.arg[0])
+            base = self.visit(node.args[0])
             exp = self.visit(node.args[1])
             result_temp = self.new_temp()
 
