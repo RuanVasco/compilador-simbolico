@@ -146,6 +146,7 @@ def main():
     inputs.append(Input("atribuir res_seno = derivar(seno x)", "cos(x)", "teste_derivada_seno"))
     inputs.append(Input("atribuir res_cos = derivar(cosseno x)", "-sin(x)", "teste_derivada_cosseno"))
     inputs.append(Input("atribuir text = 'comp' + 'iladores'", "compiladores", "teste_concatenar"))
+    inputs.append(Input("atribuir k = (x + 2) * (x - 2) e mostrar k", "(x-2)*(x+2)", "teste_mostrar"))
 
     symbol_table = {}
 

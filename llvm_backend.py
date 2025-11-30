@@ -1,3 +1,5 @@
+import datetime
+import os
 from llvmlite import ir, binding
 
 class LLVMBackend:
@@ -161,6 +163,16 @@ class LLVMBackend:
         return str(self.module)
 
     def save_to_file(self, filename="programa.ll"):
-        with open(filename, "w") as f:
+        output_dir = "out"
+
+        os.makedirs(output_dir, exist_ok=True)
+
+        out_path = os.path.join(output_dir, filename)
+
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+        with open(out_path, "w") as f:
+            f.write(f"; Gerado em: {timestamp}\n")
             f.write(str(self.module))
-        return filename
+
+        return out_path
