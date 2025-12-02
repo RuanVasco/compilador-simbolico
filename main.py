@@ -16,13 +16,6 @@ def setup_logger():
         encoding='utf-8'
     )
 
-def run_lexer(data):
-    lexer.input(data)
-    while True:
-        tok = lexer.token()
-        if not tok:
-            break
-
 def run_parser(data):
     result = parser.parse(data, lexer=lexer)
 
@@ -74,7 +67,6 @@ def process_input(input, symbol_table):
     logging.info(f"'{value}'")
 
     try:
-        run_lexer(value)
         result = run_parser(value)
 
         if result is None:
